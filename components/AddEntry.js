@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import Slidder from '../components/Slider';
+import Steppers from '../components/Steppers';
 import { getMetricMetaInfo } from '../utils/helpers';
 
 export default class AddEntry extends Component {
@@ -18,9 +20,8 @@ export default class AddEntry extends Component {
 			const count = state[metric] + step;
 
 			return {
-				...state,
-				[metric]: count > max ? max : count
-			}
+				[metric]: Math.min(count, max)
+			};
 		});
 	};
 
@@ -29,9 +30,8 @@ export default class AddEntry extends Component {
 			const count = state[metric] - getMetricMetaInfo(metric).step;
 
 			return {
-				...state,
-				[metric]: count < 0 ? 0 : count ? max : count
-			}
+				[metric]: Math.max(count, 0)
+			};
 		});
 	};
 
@@ -42,9 +42,30 @@ export default class AddEntry extends Component {
 	};
 
 	render() {
+		const metricMetaInfo = getMetricMetaInfo();
 		return (
 			<View>
-				{ getMetricMetaInfo('bike').getIcon() }
+				{ Object.keys(metricMetaInfo).map((key) => {
+					const { getIcon, type, ...rest } = metricMetaInfo[key];
+					const value = this.state[key];
+
+					return (
+						<View key={key}>
+							{ getIcon() }
+							{ type === 'slider'
+								? <Slidder
+										value={value}
+										onChange={(value) => this.slide(key, value)}
+										{...rest}/>
+								: <Steppers
+										value={value}
+										onIncrement={() => this.increment(key)}
+										onDecrement={() => this.decrement(key)}
+										{...rest}/>
+							}
+						</View>
+					);
+				})}
 			</View>
 		);
 	}
