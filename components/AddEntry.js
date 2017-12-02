@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
+import PropTypes from 'prop-types';
 import Slidder from '../components/Slider';
 import Steppers from '../components/Steppers';
 import DateHeader from '../components/DateHeader';
 import { getMetricMetaInfo, timeToString } from '../utils/helpers';
 
-function SubmitBtn({ onPress }) {
-	return (
-		<TouchableOpacity
-			onPress={onPress}>
-				<Text>SUBMIT</Text>
-		</TouchableOpacity>
-	);
-}
+const SubmitBtn = ({ onPress }) => (
+	<TouchableOpacity
+		onPress={onPress}>
+			<Text>SUBMIT</Text>
+	</TouchableOpacity>
+);
+
+SubmitBtn.propTypes = {
+	onPress: PropTypes.func.isRequired
+};
 
 export default class AddEntry extends Component {
 	state = {
