@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import PropTypes from 'prop-types';
-import Slidder from '../components/Slider';
-import Steppers from '../components/Steppers';
-import DateHeader from '../components/DateHeader';
+import { Ionicons } from '@expo/vector-icons';
+import Slidder from './Slider';
+import Steppers from './Steppers';
+import DateHeader from './DateHeader';
+import TextButton from './TextButton';
 import { getMetricMetaInfo, timeToString } from '../utils/helpers';
+import { submitEntry, removeEntry } from '../utils/api';
 
 const SubmitBtn = ({ onPress }) => (
 	<TouchableOpacity
@@ -18,6 +21,10 @@ SubmitBtn.propTypes = {
 };
 
 export default class AddEntry extends Component {
+	static propTypes = {
+		alreadyLogged: PropTypes.bool
+	};
+
 	state = {
 		run: 0,
 		bike: 0,
@@ -69,13 +76,34 @@ export default class AddEntry extends Component {
 
 		// TODO: Navigate to home
 
-		// TODO: Save to 'DB'
+		submitEntry({key, entry});
 
 		// TODO: Clear local notification
 	};
 
+	reset = () => {
+		const key = timeToString();
+
+		// TODO: Update redux
+
+		// TODO: Navigate to home
+
+		removeEntry(key);
+	};
+
 	render() {
 		const metricMetaInfo = getMetricMetaInfo();
+
+		if (this.props.alreadyLogged) {
+			return (
+				<View>
+					<Ionicons name='ios-happy-outline' size={100}/>
+					<Text>You already logged your information for today</Text>
+					<TextButton onPress={this.reset}>Reset</TextButton>
+				</View>
+			);
+		}
+
 		return (
 			<View>
 				<DateHeader date={(new Date()).toLocaleDateString()}/>
