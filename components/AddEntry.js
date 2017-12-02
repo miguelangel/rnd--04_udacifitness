@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import Slidder from '../components/Slider';
 import Steppers from '../components/Steppers';
+import DateHeader from '../components/DateHeader';
 import { getMetricMetaInfo } from '../utils/helpers';
 
 export default class AddEntry extends Component {
@@ -45,6 +46,7 @@ export default class AddEntry extends Component {
 		const metricMetaInfo = getMetricMetaInfo();
 		return (
 			<View>
+				<DateHeader date={(new Date()).toLocaleDateString()}/>
 				{ Object.keys(metricMetaInfo).map((key) => {
 					const { getIcon, type, ...rest } = metricMetaInfo[key];
 					const value = this.state[key];
