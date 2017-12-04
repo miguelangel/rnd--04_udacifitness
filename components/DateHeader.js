@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 import { purple } from '../utils/colors';
 
 const DateHeader = ({ date }) => {
-	return (
-		<Text style={{color: purple, fontSize: 25}}>
-			{ date }
-		</Text>
-	);
+  return (
+    <Text style={{color: purple, fontSize: 25}}>
+      { date }
+    </Text>
+  );
 };
 
 DateHeader.propTypes = {
-	date: PropTypes.string.isRequired
+  date: PropTypes.string.isRequired
 };
 
 export default DateHeader;
