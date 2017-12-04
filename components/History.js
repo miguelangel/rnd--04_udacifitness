@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, Platform,
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import UdaciFitnessCalendar from 'udacifitness-calendar';
+import { AppLoading } from 'expo';
 import DateHeader from './DateHeader';
 import MetricCard from './MetricCard';
 import { receiveEntries, addEntry } from '../actions';
@@ -13,7 +14,12 @@ import { white } from '../utils/colors';
 
 class History extends Component {
 	static propTypes = {
-		dispatch: PropTypes.func.isRequired
+		dispatch: PropTypes.func.isRequired,
+		entries: PropTypes.object.isRequired
+	};
+
+	state = {
+		ready: false
 	};
 
 	componentDidMount() {
@@ -26,11 +32,11 @@ class History extends Component {
 					dispatch(addEntry({
 						[timeToString()]: getDailyReminderValue()
 					}));
-				}
-			});
+				}})
+			.then(() => this.setState({ready:true}));
 	}
 
-	renderItem = ({today, ...metrics}, formattedDate, key) => (
+	renderItem = ({today, ...metrics}, formattedDate) => (
 		<View style={styles.item}>
 			{today
 				? <View>
@@ -39,7 +45,7 @@ class History extends Component {
 							{today}
 						</Text>
 					</View>
-				: <TouchableOpacity onPress={() => console.log('Pressed!')}>
+				: <TouchableOpacity onPress={() => console.log('Pressed!!')}>
 						<MetricCard metrics={metrics} date={formattedDate}/>
 					</TouchableOpacity>}
 		</View>
@@ -55,7 +61,13 @@ class History extends Component {
 	);
 
 	render() {
-		const { entries } = this.props;
+		const {entries} = this.props;
+		const {ready} = this.state;
+
+		if (ready === false) {
+			return <AppLoading/>;
+		}
+
 		return (
 			<UdaciFitnessCalendar
 				items={entries}
