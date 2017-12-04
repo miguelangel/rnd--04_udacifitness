@@ -31,7 +31,7 @@ SubmitBtn.propTypes = {
 class AddEntry extends Component {
 	static propTypes = {
 		alreadyLogged: PropTypes.bool,
-		dispatch: PropTypes.func
+		dispatch: PropTypes.func.isRequired
 	};
 
 	state = {
@@ -195,12 +195,12 @@ const styles = StyleSheet.create({
 	}
 });
 
-function mapStateToProps (state) {
+const mapStateToProps = (state) => {
 	const key = timeToString();
 
 	return {
 		alreadyLogged: state[key] && typeof state[key].today === 'undefined'
 	};
-}
+};
 
 export default connect(mapStateToProps)(AddEntry);
