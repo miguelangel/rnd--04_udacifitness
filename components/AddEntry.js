@@ -4,7 +4,7 @@ import {View, TouchableOpacity, Text, Platform,
 import PropTypes from 'prop-types';
 import {Ionicons} from '@expo/vector-icons';
 import {connect} from 'react-redux';
-import {NavigationActions} from '../react-navigation';
+import {NavigationActions} from 'react-navigation';
 import Slidder from './Slider';
 import Steppers from './Steppers';
 import DateHeader from './DateHeader';
