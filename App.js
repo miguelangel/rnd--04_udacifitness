@@ -9,6 +9,7 @@ import {Constants} from 'expo';
 import AddEntry from './components/AddEntry';
 import History from './components/History';
 import EntryDetails from './components/EntryDetails';
+import Live from './components/Live';
 import {purple, white} from './utils/colors';
 import reducer from './reducers';
 
@@ -39,6 +40,15 @@ const Tabs = TabNavigator({
       // eslint-disable-next-line react/display-name, react/prop-types
       tabBarIcon: ({tintColor}) => <FontAwesome name='plus-square' size={30}
         color={tintColor}/>
+    }
+  },
+  Live: {
+    screen: Live,
+    navigationOptions: {
+      tabBarLabel: 'Live',
+      // eslint-disable-next-line react/display-name, react/prop-types
+      tabBarIcon: ({tintColor}) => <Ionicons name='ios-speedometer' size={30}
+      color={tintColor}/>
     }
   }
 }, {
