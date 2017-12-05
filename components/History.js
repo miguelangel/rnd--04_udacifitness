@@ -15,7 +15,8 @@ import { white } from '../utils/colors';
 class History extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    entries: PropTypes.object.isRequired
+    entries: PropTypes.object.isRequired,
+    navigation: PropTypes.object.isRequired
   };
 
   state = {
@@ -36,7 +37,7 @@ class History extends Component {
       .then(() => this.setState({ready:true}));
   }
 
-  renderItem = ({today, ...metrics}, formattedDate) => (
+  renderItem = ({today, ...metrics}, formattedDate, key) => (
     <View style={styles.item}>
       {today
         ? <View>
@@ -45,7 +46,8 @@ class History extends Component {
               {today}
             </Text>
           </View>
-        : <TouchableOpacity onPress={() => console.log('Pressed!!')}>
+        : <TouchableOpacity onPress={() =>
+            this.props.navigation.navigate('EntryDetails', {entryId: key})}>
             <MetricCard metrics={metrics} date={formattedDate}/>
           </TouchableOpacity>}
     </View>
@@ -90,10 +92,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     shadowOpacity: 0.8,
     shadowColor: 'rgba(0, 0, 0, 0.24)',
-    shadowOffset: {
-      width: 0,
-      height: 3
-    }
+    shadowOffset: {width: 0, height: 3}
   },
   noDataText: {
     fontSize: 20,
