@@ -1,13 +1,13 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet,
-  Platform } from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet,
+  Platform} from 'react-native';
 import PropTypes from 'prop-types';
-import { FontAwesome, Entypo } from '@expo/vector-icons';
-import { white, gray, purple } from '../utils/colors';
+import {FontAwesome, Entypo} from '@expo/vector-icons';
+import {white, gray, purple} from '../utils/colors';
 
 const Steppers = ({unit, value, onIncrement, onDecrement}) => (
   <View style={[styles.row, {justifyContent: 'space-between'}]}>
-    { Platform.OS === 'ios'
+    {Platform.OS === 'ios'
       ?  <View style={{flexDirection: 'row'}}>
           <TouchableOpacity
             style={[styles.iosBtn,

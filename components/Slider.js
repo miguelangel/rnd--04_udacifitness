@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, Slider as NativeSlider, StyleSheet } from 'react-native';
+import {View, Text, Slider as NativeSlider, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
-import { gray } from '../utils/colors';
+import {gray} from '../utils/colors';
 
 const Slider = ({max, unit, step, value, onChange}) => (
   <View style={styles.row}>

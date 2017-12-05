@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, Platform,
-  TouchableOpacity } from 'react-native';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {View, Text, StyleSheet, Platform,
+  TouchableOpacity} from 'react-native';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import UdaciFitnessCalendar from 'udacifitness-calendar';
-import { AppLoading } from 'expo';
+import {AppLoading} from 'expo';
 import DateHeader from './DateHeader';
 import MetricCard from './MetricCard';
-import { receiveEntries, addEntry } from '../actions';
-import { timeToString, getDailyReminderValue } from '../utils/helpers';
-import { fetchCalendarResults } from '../utils/api';
-import { white } from '../utils/colors';
+import {receiveEntries, addEntry} from '../actions';
+import {timeToString, getDailyReminderValue} from '../utils/helpers';
+import {fetchCalendarResults} from '../utils/api';
+import {white} from '../utils/colors';
 
 class History extends Component {
   static propTypes = {

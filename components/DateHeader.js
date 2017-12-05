@@ -1,12 +1,12 @@
 import React from 'react';
-import { Text } from 'react-native';
+import {Text} from 'react-native';
 import PropTypes from 'prop-types';
-import { purple } from '../utils/colors';
+import {purple} from '../utils/colors';
 
-const DateHeader = ({ date }) => {
+const DateHeader = ({date}) => {
   return (
     <Text style={{color: purple, fontSize: 25}}>
-      { date }
+      {date}
     </Text>
   );
 };
