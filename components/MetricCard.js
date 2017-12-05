@@ -31,7 +31,7 @@ const MetricCard = ({date, metrics}) => (
 );
 
 MetricCard.propTypes = {
-  date: PropTypes.string.isRequired,
+  date: PropTypes.string,
   metrics: PropTypes.object.isRequired
 };
 
