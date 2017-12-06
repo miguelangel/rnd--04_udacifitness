@@ -12,6 +12,7 @@ import EntryDetails from './components/EntryDetails';
 import Live from './components/Live';
 import {purple, white} from './utils/colors';
 import reducer from './reducers';
+import {setLocalNotification} from './utils/helpers';
 
 const StatusBar = ({backgroundColor, ... props}) => (
   <View style={{backgroundColor, height: Constants.statusBarHeight}}>
@@ -82,6 +83,9 @@ const MainNavigator = StackNavigator({
 });
 
 export default class App extends React.Component {
+  componentDidMount () {
+    setLocalNotification();
+  }
   render() {
     return (
       <Provider store={createStore(reducer)}>

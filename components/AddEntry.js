@@ -12,8 +12,9 @@ import TextButton from './TextButton';
 import {addEntry} from '../actions';
 import {submitEntry, removeEntry} from '../utils/api';
 import {white, purple} from '../utils/colors';
-import {getMetricMetaInfo, timeToString,
-  getDailyReminderValue} from '../utils/helpers';
+import {getMetricMetaInfo, timeToString, getDailyReminderValue,
+  clearLocalNotification, setLocalNotification} from '../utils/helpers';
+
 
 const SubmitBtn = ({onPress}) => (
   <TouchableOpacity
@@ -91,6 +92,9 @@ class AddEntry extends Component {
     this.toHome();
 
     submitEntry({key, entry});
+
+    clearLocalNotification()
+      .then(setLocalNotification);
   };
 
   reset = () => {
